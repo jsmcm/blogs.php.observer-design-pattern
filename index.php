@@ -44,6 +44,9 @@ class Subject implements SubjectInterface
             $observer->update();
         }
     }
+
+    // OTHER METHODS HERE...
+
 }
 
 
@@ -60,6 +63,9 @@ class ObserverOne implements ObserverInterface
     public function update() {
         print "\r\nupdate called in ObserverOne\r\n";
     }
+
+    // OTHER METHODS HERE...
+    
 }
 
 class ObserverTwo implements ObserverInterface
@@ -69,6 +75,9 @@ class ObserverTwo implements ObserverInterface
     public function update() {
         print "\r\nupdate called in ObserverTwo\r\n";
     }
+
+    // OTHER METHODS HERE...
+    
 }
 
 
