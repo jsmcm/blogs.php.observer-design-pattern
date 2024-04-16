@@ -4,8 +4,8 @@
 interface SubjectInterface
 {
 
-    public function register($object);
-    public function unregister($object);
+    public function subscribe($object);
+    public function unsubscribe($object);
     public function notify();
 
 }
@@ -14,13 +14,13 @@ class Subject implements SubjectInterface
 {
     private $observers = [];
 
-    public function register($object)
+    public function subscribe($object)
     {
 
         print "Checking if ".$object->name." is already an observer?\r\n";
 
         if ( ! in_array($object, $this->observers)) {
-            print "its not, registering it now.\r\n";
+            print "its not, subscribing it now.\r\n";
             $this->observers[] = $object;
         } else {
             print "it is already\r\n";
@@ -28,7 +28,7 @@ class Subject implements SubjectInterface
 
     }
 
-    public function unregister($object)
+    public function unsubscribe($object)
     {
 
         $index = array_search($object, $this->observers);
@@ -63,6 +63,8 @@ class Subject implements SubjectInterface
         $this->notify();
     }
 
+    // OTHER METHODS HERE...
+
 }
 
 
@@ -79,6 +81,9 @@ class ObserverOne implements ObserverInterface
     public function update() {
         print "\r\nupdate called in ObserverOne\r\n";
     }
+
+    // OTHER METHODS HERE...
+    
 }
 
 class ObserverTwo implements ObserverInterface
@@ -88,6 +93,9 @@ class ObserverTwo implements ObserverInterface
     public function update() {
         print "\r\nupdate called in ObserverTwo\r\n";
     }
+
+    // OTHER METHODS HERE...
+    
 }
 
 
@@ -100,22 +108,22 @@ $subject = new Subject();
 
 
 print "\r\n------\r\n";
-print "Attempt to register ObserverOne as an observer with register\r\n";
+print "Attempt to subscribe ObserverOne as an observer with subscribe\r\n";
 usleep(100);
-$subject->register($ObserverOne);
+$subject->subscribe($ObserverOne);
 
 
-print "Attempt to register ObserverOne a second time as an observer with register\r\n";
+print "Attempt to subscribe ObserverOne a second time as an observer with subscribe\r\n";
 usleep(100);
-$subject->register($ObserverOne);
+$subject->subscribe($ObserverOne);
 
 
 
 
 print "\r\n------\r\n";
-print "Attempt to register ObserverTwo as an observer with register\r\n";
+print "Attempt to subscribe ObserverTwo as an observer with subscribe\r\n";
 usleep(100);
-$subject->register($ObserverTwo);
+$subject->subscribe($ObserverTwo);
 
 
 sleep(3);
@@ -129,7 +137,7 @@ $subject->updateState();
 print "\r\n------\r\n";
 print "Unregister ObserverOne as an observer with register\r\n";
 usleep(100);
-$subject->unregister($ObserverOne);
+$subject->unsubscribe($ObserverOne);
 
 
 sleep(3);
