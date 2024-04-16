@@ -44,6 +44,25 @@ class Subject implements SubjectInterface
             $observer->update();
         }
     }
+
+
+    /**
+     * Below is the "actual" functionality of this class.
+     */
+
+    /**
+     * We're mocking state change by calling this function from the outside.
+     * In real life this would be non trivial as it is in this example.
+     */
+    public function updateState()
+    {
+        // Do whatever stuff where, then notify our observers
+
+        // more code here
+
+        $this->notify();
+    }
+
 }
 
 
@@ -102,9 +121,9 @@ $subject->register($ObserverTwo);
 sleep(3);
 
 print "after sleep\r\n";
-print "Calling update on subject (with two registered observers)...\r\n";
+print "Calling updateState on subject (with two registered observers)...\r\n";
 usleep(100);
-$subject->update();
+$subject->updateState();
 
 
 print "\r\n------\r\n";
@@ -116,9 +135,9 @@ $subject->unregister($ObserverOne);
 sleep(3);
 
 print "after sleep\r\n";
-print "Calling update on subject (with one registered observer)...\r\n";
+print "Calling updateState on subject (with one registered observer)...\r\n";
 usleep(100);
-$subject->update();
+$subject->updateState();
 
 
 
